@@ -2,7 +2,7 @@
 require_once('class.phpmailer.php');
 include_once("class.smtp.php");
 function sendMsg($params){
-	$url="URL for API";
+	include("../credentials.php");
 	$postData = "";
 	foreach($params as $k => $v){
 		$postData.= $k . '='.$v.'&'; 
@@ -20,7 +20,7 @@ function sendMsg($params){
 	return $output;
 }
 function sendEmail($email, $location){
-	include_once("../credentials.php");
+	include("../credentials.php");
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
 	$mail->SMTPDebug  = 2;
@@ -45,9 +45,9 @@ if(isset($_POST['phone'], $_POST['location'], $_POST['email']) && !empty($_POST[
 	$params = array(
 		"From" => "+12267786035",
 		"To" => $_POST['phone'],
-		"Body" => $_POST['location']
+		"Body" => "http://maps.google.com/?q=".$_POST['location']
 	); 
-	//echo sendMsg($params);
+	echo sendMsg($params);
 	sendEmail($_POST['email'], $_POST['location']);
 }
 else{
