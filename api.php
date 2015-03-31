@@ -40,7 +40,7 @@ function sendEmail($email, $location){
 	  echo "Mail sent!";
 	}
 }
-if(isset($_POST['phone'], $_POST['location'], $_POST['email'])){
+if(isset($_POST['phone'], $_POST['location'], $_POST['email']) && !empty($_POST['phone']) && !empty($_POST['location']) && !empty($_POST['email'])){
 	//echo "Got everything";
 	$params = array(
 		"From" => "+12267786035",
