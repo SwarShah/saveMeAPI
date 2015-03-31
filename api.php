@@ -1,4 +1,7 @@
 <?php
+require_once('class.phpmailer.php');
+include_once("class.smtp.php");
+require_once("../credentials.php");
 function sendMsg($params){
 	$url="URL for API";
 	$postData = "";
