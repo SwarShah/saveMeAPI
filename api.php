@@ -21,7 +21,7 @@ function sendEmail($email, $location){
 	$to = $email;
 	$subject = "Emergency";
 	$message = $location;
-	$from = "no-reply@mySaveMeApp.com"
+	$from = "no-reply@mySaveMeApp.com";
 	mail($to, $subject, $message, $from);
 }
 if(isset($_POST['phone'], $_POST['location'], $_POST['email'])){
