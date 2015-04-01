@@ -1,6 +1,7 @@
 <?php
 require_once('class.phpmailer.php');
 include_once("class.smtp.php");
+//used for sending sms
 function sendMsg($params){
 	include("../credentials.php");
 	$postData = "";
@@ -19,6 +20,7 @@ function sendMsg($params){
 	curl_close($ch);
 	return $output;
 }
+//used to send email
 function sendEmail($email, $location){
 	include("../credentials.php");
 	$mail = new PHPMailer();
@@ -42,11 +44,13 @@ function sendEmail($email, $location){
 }
 if(isset($_POST['phone'], $_POST['location'], $_POST['email']) && !empty($_POST['phone']) && !empty($_POST['location']) && !empty($_POST['email'])){
 	//echo "Got everything";
+	//params for sms
 	$params = array(
 		"From" => "+12267786035",
 		"To" => $_POST['phone'],
 		"Body" => "http://maps.google.com/?q=".$_POST['location']
 	); 
+	//calling functions  
 	echo sendMsg($params);
 	sendEmail($_POST['email'], $_POST['location']);
 }
