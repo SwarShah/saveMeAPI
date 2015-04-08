@@ -21,7 +21,7 @@ function sendMsg($params){
 	return $output;
 }
 //used to send email
-function sendEmail($email, $location){
+function sendEmail($email, $location, $name){
 	include("../credentials.php");
 	$mail = new PHPMailer();
 	$mail->IsSMTP();
@@ -32,7 +32,7 @@ function sendEmail($email, $location){
 	$mail->Username   = $mailUsername;
 	$mail->Password   = $mailPassword;
 	$mail->SetFrom('no-reply@swar.webs.pm', 'saveME');
-	$mail->Subject    = "Emergency";
+	$mail->Subject    = $name." is in emergency";
 	$mail->MsgHTML('<html><body><a href="http://maps.google.com/?q='.$location.'"><img src="http://maps.google.com/maps/api/staticmap?zoom=16&markers='.$location.'&size=500x300"/></a></body></html>');
 	$address = $email;
 	$mail->AddAddress($address);
@@ -42,7 +42,7 @@ function sendEmail($email, $location){
 	  echo "Mail sent!";
 	}
 }
-if(isset($_POST['phone'], $_POST['location'], $_POST['email']) && !empty($_POST['phone']) && !empty($_POST['location']) && !empty($_POST['email'])){
+if(isset($_POST['phone'], $_POST['location'], $_POST['email'], $_POST['name']) && !empty($_POST['phone']) && !empty($_POST['location']) && !empty($_POST['email']) && !empty($_POST['name'])){
 	//echo "Got everything";
 	//params for sms
 	$params = array(
@@ -52,7 +52,7 @@ if(isset($_POST['phone'], $_POST['location'], $_POST['email']) && !empty($_POST[
 	); 
 	//calling functions  
 	echo sendMsg($params);
-	sendEmail($_POST['email'], $_POST['location']);
+	sendEmail($_POST['email'], $_POST['location'], $_POST['name']);
 }
 else{
 	echo "Not enough arguments";
