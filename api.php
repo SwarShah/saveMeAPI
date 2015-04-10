@@ -48,7 +48,7 @@ if(isset($_POST['phone'], $_POST['location'], $_POST['email'], $_POST['name']) &
 	$params = array(
 		"From" => "+12267786035",
 		"To" => $_POST['phone'],
-		"Body" => "http://maps.google.com/?q=".$_POST['location']
+		"Body" => "Hi, We found ".$_POST['name']." is in emergency. Last known location: http://maps.google.com/?q=".$_POST['location']
 	); 
 	//calling functions  
 	echo sendMsg($params);
